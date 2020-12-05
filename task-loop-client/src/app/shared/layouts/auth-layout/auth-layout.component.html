@@ -1,0 +1,16 @@
+<div class="header">
+  <div class="logo">
+    <a routerLink="/">Task<span class="text-blue">Loop</span></a>
+  </div>
+  <div class="nav-items">
+    <ng-container *ngFor="let link of links">
+      <div class="nav-item">
+        <a [routerLink]="[link.url]">{{ link.name }}</a>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<div class="auth-block">
+  <router-outlet></router-outlet>
+</div>

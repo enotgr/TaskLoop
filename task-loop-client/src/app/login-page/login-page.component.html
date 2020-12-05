@@ -1,0 +1,79 @@
+<form class="login-form card" [formGroup]="loginForm">
+  <h2 class="text-center text-info mb-3">Sign In</h2>
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input
+      #email
+      type="email"
+      formControlName="email"
+      aria-describedby="emailHelp"
+      placeholder="Email address"
+      class="form-control"
+      [ngClass]="{
+        'is-invalid':
+          loginForm.get('email').invalid && loginForm.get('email').touched,
+        'is-valid':
+          loginForm.get('email').valid && loginForm.get('email').touched
+      }"
+    />
+    <span
+      class="helper-text red-text"
+      *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched"
+    >
+      <small
+        *ngIf="loginForm.get('email').errors['required']"
+        class="text-danger"
+        >Enter your email
+      </small>
+      <small *ngIf="loginForm.get('email').errors['email']" class="text-danger"
+        >Invalid email address
+      </small>
+    </span>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input
+      #password
+      formControlName="password"
+      type="password"
+      class="form-control"
+      placeholder="Password"
+      [ngClass]="{
+        'is-invalid':
+          loginForm.get('password').invalid &&
+          loginForm.get('password').touched,
+        'is-valid':
+          loginForm.get('password').valid && loginForm.get('password').touched
+      }"
+    />
+    <span
+      class="helper-text red-text"
+      *ngIf="
+        loginForm.get('password').invalid && loginForm.get('password').touched
+      "
+    >
+      <small
+        *ngIf="loginForm.get('password').errors?.required"
+        class="text-danger"
+        >Enter password
+      </small>
+      <small
+        *ngIf="
+          loginForm.get('password').errors?.minlength &&
+          loginForm.get('password').errors?.minlength?.requiredLength
+        "
+        class="text-danger"
+        >Password must be at least
+        {{ loginForm.get("password").errors?.minlength?.requiredLength }}
+        characters long
+      </small>
+    </span>
+  </div>
+  <button type="submit" class="btn btn-success mt-3" (click)="onSubmit()">
+    Sign In
+  </button>
+  <small class="mt-2 text-center"
+    >Don't have an account?
+    <a routerLink="/registration">Register your company.</a>
+  </small>
+</form>
