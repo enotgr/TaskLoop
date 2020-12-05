@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const jsonwebtoken = require("jsonwebtoken");
 
 const authConfig = require("../shared/configs/auth.config");
+const errorHandler = require("../shared/utils/errorHandler");
 const Company = require("../models/Company");
 const User = require("../models/User");
 
@@ -70,6 +71,6 @@ module.exports.register = async function (req, res) {
 
     res.status(201).json({ company, user });
   } catch (error) {
-    //
+    errorHandler(res, error);
   }
 };
