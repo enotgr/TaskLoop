@@ -69,11 +69,16 @@
       </small>
     </span>
   </div>
-  <button type="submit" class="btn btn-success mt-3" (click)="onSubmit()">
+  <button
+    type="submit"
+    class="btn btn-success mt-3"
+    [disabled]="loginForm.invalid"
+    (click)="onSubmit()"
+  >
     Sign In
   </button>
   <small class="mt-2 text-center"
     >Don't have an account?
-    <a routerLink="/registration">Register your company.</a>
+    <a routerLink="/register">Register your company.</a>
   </small>
 </form>
