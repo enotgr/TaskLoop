@@ -1,5 +1,5 @@
 # TaskLoop
 
-## Descriptiom
+## Description
 
 > Description coming soon
