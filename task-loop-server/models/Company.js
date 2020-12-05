@@ -1,28 +1,28 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const companySchema = new Schema({
   name: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   creator: {
     type: Schema.Types.ObjectId,
-    ref: 'users'
+    ref: "users",
   },
   projects: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'projects'
-    }
+      ref: "projects",
+    },
   ],
   users: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'users'
-    }
-  ]
+      ref: "users",
+    },
+  ],
 });
 
-module.exports = mongoose.model('companies', companySchema);
+module.exports = mongoose.model("companies", companySchema);
