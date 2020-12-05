@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const TaskStatus = require('../shared/enums/task-status-enum');
 const Schema = mongoose.Schema;
 
 const projectSchema = new Schema({
@@ -15,16 +14,16 @@ const projectSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'users'
   },
-  users: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'users'
-    }
-  ],
   tasks: [
     {
       type: Schema.Types.ObjectId,
       ref: 'tasks'
+    }
+  ],
+  users: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'users'
     }
   ]
 });

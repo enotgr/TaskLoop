@@ -32,10 +32,22 @@ const taskSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'users'
   },
-  tag: {
-    type: String,
-    default: ''
-  }
+  tags: [
+    {
+      type: String,
+      default: ''
+    }
+  ],
+  parent: {
+    ref: 'tasks',
+    type: Schema.Types.ObjectId
+  },
+  subtasks: [
+    {
+      ref: 'tasks',
+      type: Schema.Types.ObjectId
+    }
+  ]
 });
 
 module.exports = mongoose.model('tasks', taskSchema);
