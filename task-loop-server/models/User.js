@@ -13,8 +13,14 @@ const userSchema = new Schema({
   },
   projects: [
     {
-      type: Schema.Types.ObjectId,
-      ref: 'projects'
+      ref: 'projects',
+      type: Schema.Types.ObjectId
+    }
+  ],
+  tasks: [
+    {
+      ref: 'tasks',
+      type: Schema.Types.ObjectId
     }
   ],
   firstname: {
