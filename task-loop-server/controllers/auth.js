@@ -41,11 +41,21 @@ module.exports.login = async function (req, res) {
 };
 
 module.exports.register = async function (req, res) {
-  const candidate = await User.findOne({ email: req.body.email });
+  const userCandidate = await User.findOne({ email: req.body.email });
 
-  if (candidate) {
+  if (userCandidate) {
     res.status(409).json({
       message: "This email address is already taken",
+    });
+
+    return;
+  }
+
+  const companyCandidate = await Company.findOne({ name: req.body.company });
+
+  if (companyCandidate) {
+    res.status(409).json({
+      message: "This company name is already taken",
     });
 
     return;
@@ -69,7 +79,7 @@ module.exports.register = async function (req, res) {
     await user.save();
     await company.save();
 
-    res.status(201).json({ company, user });
+    res.status(201).json(user);
   } catch (error) {
     errorHandler(res, error);
   }
