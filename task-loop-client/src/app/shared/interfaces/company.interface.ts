@@ -3,4 +3,5 @@ export interface Company {
   creator?: string;
   projects?: string[];
   users?: string[];
+  _id?: string;
 }

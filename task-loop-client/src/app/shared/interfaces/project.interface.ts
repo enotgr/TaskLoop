@@ -4,4 +4,5 @@ export interface Project {
   creator?: string;
   tasks?: string[];
   users?: string[];
+  _id?: string;
 }
