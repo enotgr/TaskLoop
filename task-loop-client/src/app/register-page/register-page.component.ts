@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Company } from '../shared/interfaces/company.interface';
+import { User } from '../shared/interfaces/user.interface';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-register-page',
@@ -7,9 +10,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./register-page.component.scss'],
 })
 export class RegisterPageComponent implements OnInit {
+  private readonly authService: AuthService;
+
   registerForm: FormGroup;
 
-  constructor() {}
+  constructor(authService: AuthService) {
+    this.authService = authService;
+  }
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -23,6 +30,20 @@ export class RegisterPageComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('value:', this.registerForm.value);
+    const user: User = {
+      email: this.registerForm.value.email,
+      password: this.registerForm.value.password,
+    };
+
+    const company: Company = {
+      name: this.registerForm.value.company,
+    };
+
+    this.authService.register(user, company).subscribe(
+      () => {
+        console.log('Login success');
+      },
+      (error) => console.warn(error)
+    );
   }
 }
