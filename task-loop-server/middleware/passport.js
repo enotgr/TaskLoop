@@ -1,9 +1,11 @@
+const passport = require("passport");
+const authConfig = require("../shared/configs/auth.config");
+
 const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 const mongoose = require("mongoose");
 
-const authConfig = require("../shared/configs/auth.config");
-const User = require("../models/User");
+const User = mongoose.model("users");
 
 const options = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -18,13 +20,13 @@ module.exports = (passport) => {
           "email id"
         );
 
-        if (!user) {
+        if (user) {
+          done(null, user);
+        } else {
           done(null, false);
-          return;
         }
-        done(null, user);
       } catch (error) {
-        console.log(`Error: ${error}`);
+        console.log(error);
       }
     })
   );

@@ -9,6 +9,7 @@ const passport = require("passport");
 const appConfig = require("./app.config");
 
 const authRoutes = require("./routes/auth");
+const companyRoutes = require("./routes/company");
 
 const app = express();
 
@@ -30,5 +31,6 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/company", companyRoutes);
 
 module.exports = app;
