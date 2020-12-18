@@ -1,37 +1,6 @@
 <form class="register-form card" [formGroup]="registerForm">
   <h2 class="text-center text-info mb-3">Register</h2>
   <div class="form-group">
-    <label for="company">Company name</label>
-    <input
-      #company
-      type="text"
-      formControlName="company"
-      placeholder="Company name"
-      class="form-control"
-      [ngClass]="{
-        'is-invalid':
-          registerForm.get('company').invalid &&
-          registerForm.get('company').touched,
-        'is-valid':
-          registerForm.get('company').valid &&
-          registerForm.get('company').touched
-      }"
-    />
-    <span
-      class="helper-text red-text"
-      *ngIf="
-        registerForm.get('company').invalid &&
-        registerForm.get('company').touched
-      "
-    >
-      <small
-        *ngIf="registerForm.get('company').errors['required']"
-        class="text-danger"
-        >Enter your company name
-      </small>
-    </span>
-  </div>
-  <div class="form-group">
     <label for="email">Email address</label>
     <input
       #email
@@ -103,6 +72,60 @@
         class="text-danger"
         >Password must be at least
         {{ registerForm.get("password").errors?.minlength?.requiredLength }}
+        characters long
+      </small>
+    </span>
+  </div>
+
+  <div class="form-check">
+    <input
+      type="checkbox"
+      class="form-check-input"
+      #isCompanyCheckbox
+      (change)="onCheckIsCompany($event.target?.checked)"
+    />
+    <label class="from-check-label" for="isCompanyCheckbox">
+      Also register my company.
+    </label>
+  </div>
+
+  <div *ngIf="isCompany" class="form-group">
+    <label for="company">Company name</label>
+    <input
+      #company
+      type="text"
+      formControlName="company"
+      placeholder="Company name"
+      class="form-control"
+      [ngClass]="{
+        'is-invalid':
+          registerForm.get('company').invalid &&
+          registerForm.get('company').touched,
+        'is-valid':
+          registerForm.get('company').valid &&
+          registerForm.get('company').touched
+      }"
+    />
+    <span
+      class="helper-text red-text"
+      *ngIf="
+        registerForm.get('company').invalid &&
+        registerForm.get('company').touched
+      "
+    >
+      <small
+        *ngIf="registerForm.get('company').errors['required']"
+        class="text-danger"
+        >Enter your company name
+      </small>
+      <small
+        *ngIf="
+          registerForm.get('company').errors?.minlength &&
+          registerForm.get('company').errors?.minlength?.requiredLength
+        "
+        class="text-danger"
+        >The company name must be at least
+        {{ registerForm.get("company").errors?.minlength?.requiredLength }}
         characters long
       </small>
     </span>
