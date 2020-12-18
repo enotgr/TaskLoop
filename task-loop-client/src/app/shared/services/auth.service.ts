@@ -18,12 +18,14 @@ export class AuthService {
     this.token = null;
   }
 
-  register(user: User): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>('/api/auth/register', user).pipe(
-      tap(({ token }) => {
-        this.setToken(token);
-      })
-    );
+  register(user: User): Observable<{ user: User; token: string }> {
+    return this.http
+      .post<{ user: User; token: string }>('/api/auth/register', user)
+      .pipe(
+        tap(({ token }) => {
+          this.setToken(token);
+        })
+      );
   }
 
   login(user: User): Observable<{ token: string }> {

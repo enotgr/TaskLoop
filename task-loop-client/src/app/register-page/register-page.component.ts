@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { flatMap, map, tap } from 'rxjs/operators';
+import { flatMap, map, switchMap, tap } from 'rxjs/operators';
 import { Company } from '../shared/interfaces/company.interface';
 import { User } from '../shared/interfaces/user.interface';
 import { AuthService } from '../shared/services/auth.service';
@@ -50,6 +50,7 @@ export class RegisterPageComponent implements OnInit {
     }
   }
 
+  // TODO: refactoring
   onSubmit(): void {
     const user: User = {
       email: this.registerForm.value.email,
@@ -70,21 +71,8 @@ export class RegisterPageComponent implements OnInit {
 
       this.authService
         .register(user)
-        .pipe(
-          tap(({ token }) => {
-            this.authService.setToken(token);
-            console.log('tap');
-          }),
-          map((res) => console.log('map res 1:', res)),
-          flatMap(() => {
-            console.log('flatMap');
-
-            return this.companyService.registerCompany(company);
-          }),
-          map((res) => console.log('map res 2:', res))
-        )
+        .pipe(switchMap(() => this.companyService.registerCompany(company)))
         .subscribe(
-          (res) => console.log('map res 3:', res),
           (error) => console.warn(error) // TODO: toasts service
         );
     }

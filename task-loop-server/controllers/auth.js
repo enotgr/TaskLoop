@@ -52,16 +52,21 @@ module.exports.register = async function (req, res) {
   try {
     await user.save();
 
-    const token = createToken(req.body.email, user._id);
+    const token = createToken(req.body.email, user.id);
 
-    res.status(201).json({ token: `Bearer ${token}` });
+    res.status(201).json({ user, token: `Bearer ${token}` });
   } catch (error) {
     errorHandler(res, error);
   }
 };
 
 function createToken(email, userId) {
-  return jsonwebtoken.sign({ email, userId }, authConfig.login.jwt, {
-    expiresIn: 3600,
-  });
+  return jsonwebtoken.sign(
+    {
+      email,
+      userId,
+    },
+    authConfig.login.jwt,
+    { expiresIn: 3600 }
+  );
 }
