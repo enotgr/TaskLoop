@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { authConfig } from '../configs/auth.config';
 import { User } from '../interfaces/user.interface';
 
 @Injectable({
@@ -10,7 +11,7 @@ import { User } from '../interfaces/user.interface';
 export class AuthService {
   private readonly http: HttpClient;
 
-  private token: string | null;
+  private token: string;
 
   constructor(http: HttpClient) {
     this.http = http;
@@ -26,12 +27,13 @@ export class AuthService {
     return this.http.post<{ token: string }>('/api/auth/login', user).pipe(
       tap(({ token }) => {
         this.setToken(token);
+        console.log(`Token: ${this.token}`);
       })
     );
   }
 
   setToken(token: string | null) {
-    localStorage.setItem('auth-token', token);
+    localStorage.setItem(authConfig.tokenSelector, token);
     this.token = token;
   }
 
@@ -40,11 +42,21 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
+    console.log(`Token: ${this.token}`);
+
+    // TODO: store
+    const isToken = !!this.token;
+    if (isToken) {
+      return isToken;
+    }
+
+    this.token = localStorage.getItem(authConfig.tokenSelector);
+
     return !!this.token;
   }
 
   logout() {
     this.setToken(null);
-    localStorage.clear();
+    localStorage.removeItem(authConfig.tokenSelector);
   }
 }

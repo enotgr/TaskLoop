@@ -133,7 +133,7 @@
   <button
     type="submit"
     class="btn btn-success mt-3"
-    [disabled]="registerForm.invalid"
+    [disabled]="registerForm.invalid || isLoading"
     (click)="onSubmit()"
   >
     Register
@@ -143,3 +143,7 @@
     <a routerLink="/">Sign in.</a>
   </small>
 </form>
+
+<ng-container *ngIf="isLoading">
+  <app-loader></app-loader>
+</ng-container>

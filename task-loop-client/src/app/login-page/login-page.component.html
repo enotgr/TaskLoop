@@ -72,7 +72,7 @@
   <button
     type="submit"
     class="btn btn-success mt-3"
-    [disabled]="loginForm.invalid"
+    [disabled]="loginForm.invalid || isLoading"
     (click)="onSubmit()"
   >
     Sign In
