@@ -36,7 +36,10 @@ module.exports.create = async function (req, res) {
     return;
   }
 
-  // TODO: check have this user company
+  if (user.permission === UserPermissionEnum.Company) {
+    res.status(406).json({ message: "The user already has a company." });
+    return;
+  }
 
   const company = new Company({
     name: req.body.name,

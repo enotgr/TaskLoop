@@ -8,7 +8,7 @@ const projectSchema = new Schema({
   },
   description: {
     type: String,
-    default: "",
+    default: null,
   },
   creator: {
     ref: "users",
