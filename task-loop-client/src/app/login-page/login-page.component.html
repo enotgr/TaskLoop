@@ -82,3 +82,7 @@
     <a routerLink="/register">Sign up.</a>
   </small>
 </form>
+
+<ng-container *ngIf="isLoading">
+  <app-loader></app-loader>
+</ng-container>
