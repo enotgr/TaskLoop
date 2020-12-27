@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { concat, Observable } from 'rxjs';
 import { Company } from '../shared/interfaces/company.interface';
 import { User } from '../shared/interfaces/user.interface';
@@ -12,6 +13,7 @@ import { CompanyService } from '../shared/services/company.service';
   styleUrls: ['./register-page.component.scss'],
 })
 export class RegisterPageComponent implements OnInit {
+  private readonly router: Router;
   private readonly authService: AuthService;
   private readonly companyService: CompanyService;
 
@@ -19,11 +21,19 @@ export class RegisterPageComponent implements OnInit {
 
   isCompany: boolean;
 
-  constructor(authService: AuthService, companyService: CompanyService) {
+  isLoading: boolean;
+
+  constructor(
+    router: Router,
+    authService: AuthService,
+    companyService: CompanyService
+  ) {
+    this.router = router;
     this.authService = authService;
     this.companyService = companyService;
 
     this.isCompany = false;
+    this.isLoading = false;
   }
 
   ngOnInit(): void {
@@ -51,6 +61,9 @@ export class RegisterPageComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.registerForm.disable();
+    this.isLoading = true;
+
     const user: User = {
       email: this.registerForm.value.email,
       password: this.registerForm.value.password,
@@ -72,12 +85,12 @@ export class RegisterPageComponent implements OnInit {
       );
     }
 
-    requests$.subscribe(
-      (response) => {
-        // TODO: redirect
-        console.log(response);
-      },
-      (error) => console.error(error)
-    );
+    requests$.subscribe(console.log, console.error, () => {
+      this.registerForm.reset();
+      this.registerForm.enable();
+      this.isLoading = false;
+      // TODO: redirect
+      this.router.navigate(['/board']);
+    });
   }
 }

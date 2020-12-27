@@ -1,0 +1,52 @@
+@import "~src/styles";
+
+.curtain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $curtain_color;
+  z-index: 9999;
+}
+
+.loader {
+  position: fixed;
+  height: 100vh;
+  top: calc(50% - 36px);
+  left: calc(50% - 36px);
+
+  .circle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 72px;
+    height: 72px;
+    border: 4px solid $main_green_color;
+    opacity: 1;
+    border-radius: 50%;
+    animation: loader 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  }
+
+  .inner {
+    animation-delay: -0.5s;
+  }
+}
+
+@keyframes loader {
+  0% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+
+  100% {
+    top: 0px;
+    left: 0px;
+    width: 72px;
+    height: 72px;
+    opacity: 0;
+  }
+}

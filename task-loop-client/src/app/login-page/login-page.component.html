@@ -72,7 +72,7 @@
   <button
     type="submit"
     class="btn btn-success mt-3"
-    [disabled]="loginForm.invalid"
+    [disabled]="loginForm.invalid || isLoading"
     (click)="onSubmit()"
   >
     Sign In
@@ -82,3 +82,7 @@
     <a routerLink="/register">Sign up.</a>
   </small>
 </form>
+
+<ng-container *ngIf="isLoading">
+  <app-loader></app-loader>
+</ng-container>

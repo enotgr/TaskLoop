@@ -49,8 +49,9 @@ module.exports.create = async function (req, res) {
   });
 
   try {
-    await company.save();
+    const companyObj = await company.save();
     user.set("permission", UserPermissionEnum.Company);
+    user.set("company", companyObj.id);
     await user.save();
     res.status(201).json(company);
   } catch (error) {
