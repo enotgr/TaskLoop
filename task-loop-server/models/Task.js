@@ -1,53 +1,55 @@
-const mongoose = require('mongoose');
-const TaskStatus = require('../shared/enums/task-status-enum');
-const TaskPriority = require('../shared/enums/task-priority-enum');
+const mongoose = require("mongoose");
+const TaskStatus = require("../shared/enums/task-status-enum");
+const TaskPriority = require("../shared/enums/task-priority-enum");
 const Schema = mongoose.Schema;
 
 const taskSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   number: {
     type: Number,
-    required: true
+    required: true,
   },
   priority: {
     type: TaskPriority,
-    required: true
+    required: true,
   },
   status: {
     type: TaskStatus,
-    default: TaskStatus.Todo
+    default: TaskStatus.Todo,
   },
   description: {
     type: String,
-    default: ''
+    default: null,
   },
   creator: {
     type: Schema.Types.ObjectId,
-    ref: 'users'
+    ref: "users",
   },
   performer: {
     type: Schema.Types.ObjectId,
-    ref: 'users'
+    ref: "users",
   },
-  tags: [
+  tags: [{ type: String }],
+  comments: [
     {
-      type: String,
-      default: ''
-    }
+      type: Schema.Types.ObjectId,
+      ref: "comments",
+    },
   ],
   parent: {
-    ref: 'tasks',
-    type: Schema.Types.ObjectId
+    ref: "tasks",
+    type: Schema.Types.ObjectId,
+    default: null,
   },
   subtasks: [
     {
-      ref: 'tasks',
-      type: Schema.Types.ObjectId
-    }
-  ]
+      ref: "tasks",
+      type: Schema.Types.ObjectId,
+    },
+  ],
 });
 
-module.exports = mongoose.model('tasks', taskSchema);
+module.exports = mongoose.model("tasks", taskSchema);

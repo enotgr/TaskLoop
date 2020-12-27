@@ -13,8 +13,14 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  company: {
+    ref: "companies",
+    type: Schema.Types.ObjectId,
+    default: null,
+  },
   permission: {
     type: UserPermissionEnum,
+    required: true,
     default: UserPermissionEnum.User,
   },
   projects: [
@@ -29,17 +35,22 @@ const userSchema = new Schema({
       type: Schema.Types.ObjectId,
     },
   ],
+  registered: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
   firstname: {
     type: String,
-    default: "",
+    default: null,
   },
   lastname: {
     type: String,
-    default: "",
+    default: null,
   },
   avatar: {
     type: String,
-    default: "",
+    default: null,
   },
 });
 

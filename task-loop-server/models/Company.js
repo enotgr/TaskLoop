@@ -11,12 +11,6 @@ const companySchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "users",
   },
-  projects: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "projects",
-    },
-  ],
   users: [
     {
       type: Schema.Types.ObjectId,
