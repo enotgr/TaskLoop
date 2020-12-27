@@ -1,10 +1,11 @@
 const Company = require("../models/Company");
+const User = require("../models/User");
+const UserPermissionEnum = require("../shared/enums/user-permission-enum");
 const errorHandler = require("../shared/utils/errorHandler");
 
 module.exports.getById = async function (req, res) {
   try {
     const company = await Company.findById(req.params.id);
-
     res.status(200).json(company);
   } catch (error) {
     errorHandler(res, error);
@@ -18,20 +19,35 @@ module.exports.create = async function (req, res) {
     res.status(409).json({
       message: "This company name is already taken.",
     });
+    return;
+  }
 
+  const userId = req.user.id;
+
+  if (!userId) {
+    errorHandler(res, { message: "Unknown token error." });
     return;
   }
 
   const company = new Company({
     name: req.body.name,
-    creator: req.user.id,
+    creator: userId,
     projects: [],
-    users: [req.user.id],
+    users: [userId],
   });
+
+  const user = await User.findById(userId);
+
+  if (!user) {
+    res.status(404).json({ message: "User is not found." });
+    return;
+  }
+
+  user.set("permission", UserPermissionEnum.Company);
 
   try {
     await company.save();
-
+    await user.save();
     res.status(201).json(company);
   } catch (error) {
     errorHandler(res, error);

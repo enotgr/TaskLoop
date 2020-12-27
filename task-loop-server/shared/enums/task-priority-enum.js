@@ -1,8 +1,6 @@
-const TaskPriorityEnum = Object.freeze({
-  Low: "Low",
-  Medium: "Medium",
-  High: "High",
-  Critical: "Critical",
+module.exports = Object.freeze({
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+  Critical: "critical",
 });
-
-module.exports = TaskPriorityEnum;
