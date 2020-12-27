@@ -26,7 +26,6 @@ module.exports.login = async function (req, res) {
   }
 
   const token = createToken(candidate.email, candidate._id);
-
   res.status(200).json({ token: `Bearer ${token}` });
 };
 
@@ -37,7 +36,6 @@ module.exports.register = async function (req, res) {
     res.status(409).json({
       message: "This email address is already taken.",
     });
-
     return;
   }
 
@@ -51,10 +49,7 @@ module.exports.register = async function (req, res) {
 
   try {
     await user.save();
-
-    const token = createToken(req.body.email, user.id);
-
-    res.status(201).json({ user, token: `Bearer ${token}` });
+    res.status(201).json(user);
   } catch (error) {
     errorHandler(res, error);
   }

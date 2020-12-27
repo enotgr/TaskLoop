@@ -29,13 +29,6 @@ module.exports.create = async function (req, res) {
     return;
   }
 
-  const company = new Company({
-    name: req.body.name,
-    creator: userId,
-    projects: [],
-    users: [userId],
-  });
-
   const user = await User.findById(userId);
 
   if (!user) {
@@ -43,10 +36,18 @@ module.exports.create = async function (req, res) {
     return;
   }
 
-  user.set("permission", UserPermissionEnum.Company);
+  // TODO: check have this user company
+
+  const company = new Company({
+    name: req.body.name,
+    creator: userId,
+    projects: [],
+    users: [userId],
+  });
 
   try {
     await company.save();
+    user.set("permission", UserPermissionEnum.Company);
     await user.save();
     res.status(201).json(company);
   } catch (error) {
@@ -63,6 +64,7 @@ module.exports.remove = async function (req, res) {
     });
 
     // TODO: remove users
+    // TODO: change user permission on "user"
 
     res.status(200).json({
       message: "Company deleted.",
