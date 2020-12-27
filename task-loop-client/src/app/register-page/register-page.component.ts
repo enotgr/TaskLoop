@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { flatMap, map, switchMap, tap } from 'rxjs/operators';
+import { concat, Observable } from 'rxjs';
 import { Company } from '../shared/interfaces/company.interface';
 import { User } from '../shared/interfaces/user.interface';
 import { AuthService } from '../shared/services/auth.service';
@@ -50,31 +50,34 @@ export class RegisterPageComponent implements OnInit {
     }
   }
 
-  // TODO: refactoring
   onSubmit(): void {
     const user: User = {
       email: this.registerForm.value.email,
       password: this.registerForm.value.password,
     };
 
-    if (!this.isCompany) {
-      this.authService.register(user).subscribe(
-        () => {
-          console.log('Register user success');
-        },
-        (error) => console.warn(error)
-      );
-    } else {
+    let requests$: Observable<any> = concat(
+      this.authService.register(user),
+      this.authService.login(user)
+    );
+
+    if (this.isCompany) {
       const company: Company = {
         name: this.registerForm.value.company,
       };
 
-      this.authService
-        .register(user)
-        .pipe(switchMap(() => this.companyService.registerCompany(company)))
-        .subscribe(
-          (error) => console.warn(error) // TODO: toasts service
-        );
+      requests$ = concat(
+        requests$,
+        this.companyService.registerCompany(company)
+      );
     }
+
+    requests$.subscribe(
+      (response) => {
+        // TODO: redirect
+        console.log(response);
+      },
+      (error) => console.error(error)
+    );
   }
 }
