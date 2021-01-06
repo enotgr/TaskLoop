@@ -1,11 +1,13 @@
 <div class="header">
   <div class="logo">
-    <a routerLink="/board">Task<span class="text-blue">Loop</span></a>
+    <a routerLink="/board" class="text-decoration-none logo-link">
+      Task<span class="text-blue">Loop</span>
+    </a>
   </div>
   <div class="nav-items">
     <ng-container *ngFor="let link of links">
       <div class="nav-item">
-        <a routerLink="[link.url]">{{ link.name }}</a>
+        <a [routerLink]="link.url" class="text-decoration-none text-light">{{ link.name }}</a>
       </div>
     </ng-container>
   </div>

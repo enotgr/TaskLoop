@@ -1,15 +1,16 @@
-a {
-  text-decoration: none;
-  color: #dbdbdb;
+@import "~src/styles";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   height: 60px;
-
   background-color: #1d1d1d;
 
   .nav-items {
@@ -25,13 +26,17 @@ a {
 
   .logo {
     position: absolute;
-    top: 12px;
+    top: 8px;
     left: 20px;
     font-family: "Audiowide", cursive;
     font-size: 26px;
 
-    .text-blue {
-      color: #8cbbf8;
+    .logo-link {
+      color: $logo_color_1;
+
+      .text-blue {
+        color: $logo_color_2;
+      }
     }
   }
 }
