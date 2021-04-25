@@ -10,6 +10,7 @@ const appConfig = require('./app.config');
 const authRoutes = require('./routes/auth');
 const companyRoutes = require('./routes/company');
 const userProfileRoutes = require('./routes/user-profile');
+const projectsRoutes = require('./routes/projects');
 
 const app = express();
 
@@ -33,5 +34,6 @@ app.use(cors());
 app.use('/api/auth', authRoutes);
 app.use('/api/company', companyRoutes);
 app.use('/api/user-profile', userProfileRoutes);
+app.use('/api/projects', projectsRoutes);
 
 module.exports = app;

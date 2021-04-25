@@ -1,7 +1,7 @@
 <div class="main-container">
   <ng-container *ngIf="userInfo$ | async as userInfo">
     <ng-container *ngIf="!userInfo.projects.length">
-      <div class="no-project-container card" [ngSwitch]="userInfo.permission">
+      <div [ngSwitch]="userInfo.permission" class="no-project-container card">
         <div class="no-project-title">Projects no found.</div>
         <div class="no-project-text">You have no projects at the moment.</div>
         <div *ngSwitchCase="userPermissionEnum.Company" class="no-project-text">

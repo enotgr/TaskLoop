@@ -1,0 +1,8 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: calc(100vh - 60px);
+  background: linear-gradient(to right, #272727, #1d1d1d);
+  color: #ffffff;
+}
