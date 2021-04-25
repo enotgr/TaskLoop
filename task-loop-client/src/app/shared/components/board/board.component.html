@@ -1,0 +1,17 @@
+<div class="main-container">
+  <ng-container *ngIf="userInfo$ | async as userInfo">
+    <ng-container *ngIf="!userInfo.projects.length">
+      <div class="no-project-container card" [ngSwitch]="userInfo.permission">
+        <div class="no-project-title">Projects no found.</div>
+        <div class="no-project-text">You have no projects at the moment.</div>
+        <div *ngSwitchCase="userPermissionEnum.Company" class="no-project-text">
+          Create
+          <a [routerLink]="'/settings/new-project'">new project</a>.
+        </div>
+        <div *ngSwitchCase="userPermissionEnum.User" class="no-project-text">
+          Contact your project manager to become a project participant.
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

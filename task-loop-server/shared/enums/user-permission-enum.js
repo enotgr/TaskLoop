@@ -1,5 +1,5 @@
 module.exports = Object.freeze({
-  User: "user",
-  Company: "company",
-  Performer: "performer",
+  User: 'user',
+  Company: 'company',
+  Performer: 'performer',
 });

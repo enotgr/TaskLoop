@@ -1,0 +1,23 @@
+.main-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  .no-project-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 3rem;
+    padding: 1rem;
+
+    .no-project-title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .no-project-text {
+      font-size: 14px;
+    }
+  }
+}

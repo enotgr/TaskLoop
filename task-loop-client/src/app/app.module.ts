@@ -9,10 +9,11 @@ import { MainLayoutComponent } from './shared/layouts/main-layout/main-layout.co
 import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
-import { TokenInterceptor } from './shared/classes/token.interceptor';
+import { TokenInterceptor } from './shared/interceptors/token.interceptor';
 import { BoardPageComponent } from './board-page/board-page.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { HeaderComponent } from './shared/components/header/header.component';
+import { BoardComponent } from './shared/components/board/board.component';
 
 const components = [
   AppComponent,
@@ -23,6 +24,7 @@ const components = [
   BoardPageComponent,
   LoaderComponent,
   HeaderComponent,
+  BoardComponent,
 ];
 
 @NgModule({

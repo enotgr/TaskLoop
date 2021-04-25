@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const UserPermissionEnum = require("../shared/enums/user-permission-enum");
+const UserPermissionEnum = require('../shared/enums/user-permission-enum');
 
 const userSchema = new Schema({
   email: {
@@ -14,8 +14,9 @@ const userSchema = new Schema({
     required: true,
   },
   company: {
-    ref: "companies",
+    ref: 'companies',
     type: Schema.Types.ObjectId,
+    required: true,
     default: null,
   },
   permission: {
@@ -25,14 +26,16 @@ const userSchema = new Schema({
   },
   projects: [
     {
-      ref: "projects",
+      ref: 'projects',
       type: Schema.Types.ObjectId,
+      default: [],
     },
   ],
   tasks: [
     {
-      ref: "tasks",
+      ref: 'tasks',
       type: Schema.Types.ObjectId,
+      default: [],
     },
   ],
   registered: {
@@ -54,4 +57,4 @@ const userSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("users", userSchema);
+module.exports = mongoose.model('users', userSchema);
