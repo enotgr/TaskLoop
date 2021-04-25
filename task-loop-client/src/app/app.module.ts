@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './app-routing/app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -12,17 +12,21 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { TokenInterceptor } from './shared/classes/token.interceptor';
 import { BoardPageComponent } from './board-page/board-page.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
+import { HeaderComponent } from './shared/components/header/header.component';
+
+const components = [
+  AppComponent,
+  MainLayoutComponent,
+  AuthLayoutComponent,
+  LoginPageComponent,
+  RegisterPageComponent,
+  BoardPageComponent,
+  LoaderComponent,
+  HeaderComponent,
+];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    MainLayoutComponent,
-    AuthLayoutComponent,
-    LoginPageComponent,
-    RegisterPageComponent,
-    BoardPageComponent,
-    LoaderComponent,
-  ],
+  declarations: [...components],
   imports: [
     BrowserModule,
     AppRoutingModule,

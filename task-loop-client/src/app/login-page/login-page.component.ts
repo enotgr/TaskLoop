@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,17 +14,20 @@ export class LoginPageComponent implements OnInit {
   private readonly authService: AuthService;
 
   loginForm: FormGroup;
-
   isLoading: boolean;
+  httpErrorMessage: string;
 
   constructor(router: Router, authService: AuthService) {
     this.router = router;
     this.authService = authService;
 
     this.isLoading = false;
+    this.httpErrorMessage = '';
   }
 
   ngOnInit(): void {
+    this.authService.logout();
+
     this.loginForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [
@@ -37,12 +41,19 @@ export class LoginPageComponent implements OnInit {
     this.loginForm.disable();
     this.isLoading = true;
 
-    this.authService.login(this.loginForm.value).subscribe((response) => {
-      console.log(response);
-      this.loginForm.enable();
-      this.isLoading = false;
-      // TODO: redirect
-      this.router.navigate(['/board']);
-    }, console.error);
+    this.authService.login(this.loginForm.value).subscribe(
+      (response) => {
+        console.log(response);
+        this.loginForm.enable();
+        this.isLoading = false;
+        // TODO: redirect
+        this.router.navigate(['/board']);
+      },
+      (response: HttpErrorResponse) => {
+        this.httpErrorMessage = response.error?.message;
+        this.isLoading = false;
+        this.loginForm.enable();
+      }
+    );
   }
 }

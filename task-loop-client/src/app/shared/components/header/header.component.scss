@@ -1,0 +1,44 @@
+@import "~src/styles";
+
+.header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 60px;
+  background-color: #1d1d1d;
+
+  .nav-items {
+    display: flex;
+    flex-direction: row;
+    // justify-content: flex-end;
+    margin-left: auto;
+    // font-family: "Audiowide", cursive;
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      margin-top: 18px;
+      margin-right: 20px;
+    }
+  }
+
+  .logo {
+    // position: absolute;
+    // top: 8px;
+    // left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 20px;
+    font-family: "Audiowide", cursive;
+    font-size: 20px;
+
+    .logo-link {
+      color: $logo_color_1;
+
+      .text-blue {
+        color: $logo_color_2;
+      }
+    }
+  }
+}

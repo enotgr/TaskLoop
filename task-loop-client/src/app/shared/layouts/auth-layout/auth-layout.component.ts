@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AuthLayoutComponent {
   links = [
-    { url: '/register', name: 'Sign up' },
-    { url: '/login', name: 'Sign in' },
+    { url: '/auth/register', name: 'Sign up' },
+    { url: '/auth/login', name: 'Sign in' },
   ];
 
   constructor() {}

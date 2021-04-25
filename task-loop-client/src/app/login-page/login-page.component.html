@@ -68,6 +68,9 @@
         characters long
       </small>
     </span>
+    <small class="text-danger" *ngIf="httpErrorMessage">
+      {{ httpErrorMessage }}
+    </small>
   </div>
   <button
     type="submit"
@@ -79,7 +82,7 @@
   </button>
   <small class="mt-2 text-center"
     >Don't have an account?s
-    <a routerLink="/register">Sign up.</a>
+    <a routerLink="/auth/register">Sign up.</a>
   </small>
 </form>
 

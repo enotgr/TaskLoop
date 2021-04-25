@@ -5,38 +5,3 @@
   flex-direction: column;
   width: 100%;
 }
-
-.header {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 60px;
-  background-color: #1d1d1d;
-
-  .nav-items {
-    display: flex;
-    justify-content: flex-end;
-    font-family: "Audiowide", cursive;
-
-    .nav-item {
-      margin-top: 18px;
-      margin-right: 20px;
-    }
-  }
-
-  .logo {
-    position: absolute;
-    top: 8px;
-    left: 20px;
-    font-family: "Audiowide", cursive;
-    font-size: 26px;
-
-    .logo-link {
-      color: $logo_color_1;
-
-      .text-blue {
-        color: $logo_color_2;
-      }
-    }
-  }
-}
