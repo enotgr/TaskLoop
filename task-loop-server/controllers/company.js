@@ -1,7 +1,7 @@
-const Company = require("../models/Company");
-const User = require("../models/User");
-const UserPermissionEnum = require("../shared/enums/user-permission-enum");
-const errorHandler = require("../shared/utils/errorHandler");
+const Company = require('../models/Company');
+const User = require('../models/User');
+const UserPermissionEnum = require('../shared/enums/user-permission-enum');
+const errorHandler = require('../shared/utils/errorHandler');
 
 module.exports.getById = async function (req, res) {
   try {
@@ -17,7 +17,7 @@ module.exports.create = async function (req, res) {
 
   if (companyCandidate) {
     res.status(409).json({
-      message: "This company name is already taken.",
+      message: 'This company name is already taken.',
     });
     return;
   }
@@ -25,19 +25,19 @@ module.exports.create = async function (req, res) {
   const userId = req.user.id;
 
   if (!userId) {
-    errorHandler(res, { message: "Unknown token error." });
+    errorHandler(res, { message: 'Unknown token error.' });
     return;
   }
 
   const user = await User.findById(userId);
 
   if (!user) {
-    res.status(404).json({ message: "User is not found." });
+    res.status(404).json({ message: 'User is not found.' });
     return;
   }
 
   if (user.permission === UserPermissionEnum.Company) {
-    res.status(406).json({ message: "The user already has a company." });
+    res.status(406).json({ message: 'The user already has a company.' });
     return;
   }
 
@@ -50,8 +50,8 @@ module.exports.create = async function (req, res) {
 
   try {
     const companyObj = await company.save();
-    user.set("permission", UserPermissionEnum.Company);
-    user.set("company", companyObj.id);
+    user.set('permission', UserPermissionEnum.Company);
+    user.set('company', companyObj.id);
     await user.save();
     res.status(201).json(company);
   } catch (error) {
@@ -71,7 +71,7 @@ module.exports.remove = async function (req, res) {
     // TODO: change user permission on "user"
 
     res.status(200).json({
-      message: "Company deleted.",
+      message: 'Company deleted.',
     });
   } catch (error) {
     errorHandler(res, error);

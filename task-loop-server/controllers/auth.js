@@ -1,16 +1,16 @@
-const bcrypt = require("bcryptjs");
-const jsonwebtoken = require("jsonwebtoken");
+const bcrypt = require('bcryptjs');
+const jsonwebtoken = require('jsonwebtoken');
 
-const authConfig = require("../shared/configs/auth.config");
-const errorHandler = require("../shared/utils/errorHandler");
-const User = require("../models/User");
+const authConfig = require('../shared/configs/auth.config');
+const errorHandler = require('../shared/utils/errorHandler');
+const User = require('../models/User');
 
 module.exports.login = async function (req, res) {
   const candidate = await User.findOne({ email: req.body.email });
 
   if (!candidate) {
     res.status(404).json({
-      message: "User with this email address not found.",
+      message: 'User with this email address not found.',
     });
     return;
   }
@@ -20,7 +20,7 @@ module.exports.login = async function (req, res) {
 
   if (!isPasswordMatch) {
     res.status(401).json({
-      message: "Passwords do not match.",
+      message: 'Passwords do not match.',
     });
     return;
   }
@@ -34,7 +34,7 @@ module.exports.register = async function (req, res) {
 
   if (userCandidate) {
     res.status(409).json({
-      message: "This email address is already taken.",
+      message: 'This email address is already taken.',
     });
     return;
   }
