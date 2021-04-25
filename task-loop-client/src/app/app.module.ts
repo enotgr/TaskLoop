@@ -14,17 +14,23 @@ import { BoardPageComponent } from './board-page/board-page.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { BoardComponent } from './shared/components/board/board.component';
+import { SettingsLayoutComponent } from './shared/layouts/settings-layout/settings-layout.component';
+import { SettingsSidebarComponent } from './shared/components/settings-sidebar/settings-sidebar.component';
+import { ProjectsSettingsComponent } from './shared/components/projects-settings/projects-settings.component';
 
 const components = [
   AppComponent,
   MainLayoutComponent,
   AuthLayoutComponent,
+  SettingsLayoutComponent,
   LoginPageComponent,
   RegisterPageComponent,
   BoardPageComponent,
   LoaderComponent,
   HeaderComponent,
   BoardComponent,
+  SettingsSidebarComponent,
+  ProjectsSettingsComponent,
 ];
 
 @NgModule({
