@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { routeNames } from '../app-routing/route-names.const';
 import { AuthService } from '../shared/services/auth.service';
 
 @Component({
@@ -42,12 +43,10 @@ export class LoginPageComponent implements OnInit {
     this.isLoading = true;
 
     this.authService.login(this.loginForm.value).subscribe(
-      (response) => {
-        console.log(response);
+      () => {
         this.loginForm.enable();
         this.isLoading = false;
-        // TODO: redirect
-        this.router.navigate(['/board']);
+        this.router.navigate([`/${routeNames.board}`]);
       },
       (response: HttpErrorResponse) => {
         this.httpErrorMessage = response.error?.message;

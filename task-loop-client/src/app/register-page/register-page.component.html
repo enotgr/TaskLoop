@@ -1,5 +1,5 @@
 <form class="register-form card" [formGroup]="registerForm">
-  <h2 class="text-center text-info mb-3">Sign Up</h2>
+  <h2 class="form-name text-center mb-3">Sign Up</h2>
   <div class="form-group">
     <label for="email">Email address</label>
     <input
@@ -81,10 +81,10 @@
     <input
       type="checkbox"
       class="form-check-input"
-      #isCompanyCheckbox
+      id="is-company-checkbox"
       (change)="onCheckIsCompany($event.target?.checked)"
     />
-    <label class="from-check-label" for="isCompanyCheckbox">
+    <label class="form-check-label" for="is-company-checkbox">
       Also register my company.
     </label>
   </div>
@@ -140,7 +140,7 @@
   </button>
   <small class="mt-2 text-center"
     >Already have an account?
-    <a routerLink="/">Sign in.</a>
+    <a routerLink="/auth">Sign in.</a>
   </small>
 </form>
 

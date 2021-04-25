@@ -44,7 +44,7 @@ export class AuthService {
   isAuthenticated(): boolean {
     console.log(`Token: ${this.token}`);
 
-    // TODO: store
+    // TODO: store and cookies
     const isToken = !!this.token;
     if (isToken) {
       return isToken;
