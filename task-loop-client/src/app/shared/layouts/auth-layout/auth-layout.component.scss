@@ -5,3 +5,13 @@
   flex-direction: column;
   width: 100%;
 }
+
+.background {
+  background: url('/assets/images/background.jpg') no-repeat;
+  background-size: cover;
+  position: relative;
+  background-position: center;
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+}
